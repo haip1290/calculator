@@ -11,7 +11,7 @@ let toClear = false;
 operators.forEach((choice) => {
   choice.addEventListener("click", () => {
     console.log(`operator:${operator} choice: ${choice.textContent}`);
-    if (operator == choice.textContent || b == undefined) {
+    if (operator == choice.textContent || a == undefined) {
       toClear = true;
       return;
     }
@@ -39,19 +39,21 @@ numbers.forEach((choice) => {
 });
 // add event to equalBtn
 equalBtn.addEventListener("click", () => {
-  display.textContent = operate(operator, +a, +b);
-  a = +display.textContent;
-  b = undefined;
-  toClear = true;
+  if (a != undefined && b != undefined) {
+    display.textContent = operate(operator, +a, +b);
+    a = +display.textContent;
+    b = undefined;
+    toClear = true;
+  }
 });
 
 // add event to clear
 clearBtn.addEventListener("click", clearAll);
 
 function clearAll() {
-  display.textContent = "";
   a = undefined;
   b = undefined;
+  display.textContent = "";
   operator = "";
   isA = true;
   toClear = false;
